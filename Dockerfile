@@ -12,7 +12,7 @@ RUN apt-get update \
       curl \
       dpkg-dev \
       gcc \
-      libbz2-1.0=1.0.6-7 \
+      libbz2-1.0 \
       libdpkg-perl \
       libffi-dev \
       libgdbm3 \
@@ -21,10 +21,10 @@ RUN apt-get update \
       libyaml-dev \
       netbase \
       perl \
-      perl-base=5.20.2-2ubuntu0.1 \
+      perl-base \
       procps \
       zlib1g-dev \
-      zlib1g=1:1.2.8.dfsg-2ubuntu1
+      zlib1g
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -35,7 +35,6 @@ RUN mkdir -p /usr/local/etc \
 
 ENV RUBY_MAJOR 2.4
 ENV RUBY_VERSION 2.4.2
-ENV RUBY_DOWNLOAD_SHA256 ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507
 ENV RUBYGEMS_VERSION 2.6.14
 
 # some of ruby's build scripts are written in ruby
@@ -53,25 +52,24 @@ RUN set -ex \
     libgdbm-dev \
     libglib2.0-dev \
     libncurses-dev \
-    libncurses5=5.9+20140712-2ubuntu2 \
-    libncursesw5=5.9+20140712-2ubuntu2 \
+    libncurses5 \
+    libncursesw5 \
     libpcre3-dev \
-    libpcre3=2:8.35-3.3ubuntu1.1 \
+    libpcre3 \
     libpython-stdlib \
     libpython2.7-stdlib \
     libreadline-dev \
     libreadline6-dev \
-    libtinfo-dev=5.9+20140712-2ubuntu2 \
-    libtinfo5=5.9+20140712-2ubuntu2 \
+    libtinfo-dev \
+    libtinfo5 \
     libxml2-dev \
     libxslt-dev \
     make \
-    ncurses-bin=5.9+20140712-2ubuntu2 \
+    ncurses-bin \
     python \
     python2.7 \
   && rm -rf /var/lib/apt/lists/* \
   && curl -fSL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz" \
-  && echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.gz" | sha256sum -c - \
   && mkdir -p /usr/src/ruby \
   && tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1 \
   && rm ruby.tar.gz \
